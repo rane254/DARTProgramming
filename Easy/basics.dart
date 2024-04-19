@@ -78,16 +78,86 @@ void main() {
   // mp.call();
   // mp.playGames();
 
-  Laptop lappy = Laptop("Victus");
-  lappy.height = 16.0;
-  lappy.width = 24.0;
-  lappy.thickness = 10.0;
-  lappy.portability();
-  lappy.printDetails();
+  // Laptop lap = Laptop("HP");
+  // lap.height = 16.0;
+  // lap.width = 24.0;
+  // lap.thickness = 10.0;
+  // lap.portability();
+  // lap.printDetails();
+
+  // Animal a = Animal(); // Abstract classes can'nt be instantiated
+  // Cow cow = Cow();
+  // cow.makeSound();
+
+  // Lion lion = Lion();
+  // lion.printDetails();
+  // lion.makeSound();
+
+  Human human = Human();
+  human.legs = 2;
+  human.reproduce = true;
+  human.printDetails();
+}
+
+/*-------------------------------------------------------------------------------------*/
+// Mixins
+class LivingBeings with Walk, Talk {
+  int legs = 0;
+  bool reproduce = false;
+
+  void printDetails() {
+    print("Legs: $legs\nReproduce: $reproduce");
+  }
+}
+
+class Human extends LivingBeings with Walk, Talk {}
+
+mixin Walk {
+  void walk() {
+    print("Walking...");
+  }
+}
+
+mixin Talk {
+  void talk() {
+    print("Talking...");
+  }
 }
 
 /*-------------------------------------------------------------------------------------*/
 // Inheritance
+abstract class Animal {
+  int legs = 4;
+  bool herbivorous = true;
+
+  void makeSound();
+  void printDetails() {
+    print("Legs: $legs\nHerbivorous: $herbivorous");
+  }
+}
+
+class Cow extends Animal {
+  void makeSound() {
+    print("Moo...");
+  }
+}
+
+class Lion implements Animal {
+  @override
+  int legs = 4;
+
+  @override
+  bool herbivorous = false;
+
+  void printDetails() {
+    print("Legs: $legs\nHerbivorous: $herbivorous");
+  }
+
+  void makeSound() {
+    print("Roar...");
+  }
+}
+
 class Electronics {
   double width = 50;
   double height = 100;
